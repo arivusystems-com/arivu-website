@@ -1,4 +1,3 @@
-import { AnimatedNumber } from '@/components/animated-number'
 import { Button } from '@/components/button'
 import { Container } from '@/components/container'
 import { Footer } from '@/components/footer'
@@ -6,9 +5,10 @@ import { GradientBackground } from '@/components/gradient'
 import { Navbar } from '@/components/navbar'
 import { Heading, Lead, Subheading } from '@/components/text'
 import type { Metadata } from 'next'
+import type { ReactNode } from 'react'
 
 export const metadata: Metadata = {
-  title: 'Company',
+  title: 'About Us',
   description:
     'We’re on a mission to transform revenue organizations by harnessing vast amounts of illegally acquired customer data.',
 }
@@ -16,28 +16,40 @@ export const metadata: Metadata = {
 function Header() {
   return (
     <Container className="mt-16">
-      <Heading as="h1">Helping companies generate revenue.</Heading>
+      <Heading as="h1">Run your business in real time.</Heading>
+      <Subheading as="h2" className="mt-4">
+        Not reports. Not dashboards. Execution.
+      </Subheading>
+
       <Lead className="mt-6 max-w-3xl">
-        We’re on a mission to transform revenue organizations by harnessing vast
-        amounts of illegally acquired customer data.
+        Arivu is built for teams that want to move faster-bringing workflows,
+        data, and decisions into one unified system.
       </Lead>
       <section className="mt-16 grid grid-cols-1 lg:grid-cols-2 lg:gap-12">
         <div className="max-w-lg">
           <h2 className="text-2xl font-medium tracking-tight">Our mission</h2>
-          <p className="mt-6 text-sm/6 text-gray-600">
-            At Radiant, we are dedicated to transforming the way revenue
-            organizations source and close deals. Our mission is to provide our
-            customers with an unfair advantage over both their competitors and
-            potential customers through insight and analysis. We’ll stop at
-            nothing to get you the data you need to close a deal.
+          <p className="mt-6 text-base/7 text-gray-700">
+            We&apos;re building a system where businesses don&apos;t operate in
+            silos.
           </p>
-          <p className="mt-8 text-sm/6 text-gray-600">
-            We’re customer-obsessed — putting the time in to build a detailed
-            financial picture of every one of our customers so that we know more
-            about your business than you do. We are in this together, mostly
-            because we are all implicated in large-scale financial crime. In our
-            history as a company, we’ve never lost a customer, because if any
-            one of us talks, we all go down.
+          <p className="mt-5 text-base/7 text-gray-700">
+            Today, teams juggle CRMs, spreadsheets, dashboards, and disconnected
+            tools&mdash;leading to delays, missed context, and reactive
+            decisions.
+          </p>
+          <p className="mt-6 text-base/7 font-semibold text-gray-950">
+            Arivu changes that.
+          </p>
+          <p className="mt-5 text-base/7 text-gray-700">
+            Our mission is to give companies a single, flexible platform to:
+          </p>
+          <ul className="mt-4 list-disc space-y-1 pl-8 text-base/7 text-gray-700">
+            <li>manage workflows</li>
+            <li>connect data across teams</li>
+            <li>and take action instantly</li>
+          </ul>
+          <p className="mt-5 text-base/7 text-gray-700">
+            So operations don&apos;t just get tracked&mdash;they get executed.
           </p>
         </div>
         <div className="pt-20 lg:row-span-2 lg:-mr-16 xl:mr-auto">
@@ -45,34 +57,34 @@ function Header() {
             <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
               <img
                 alt=""
-                src="/company/1.jpg"
+                src="/about-us/1.jpg"
                 className="block size-full object-cover"
               />
             </div>
             <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
               <img
                 alt=""
-                src="/company/2.jpg"
+                src="/about-us/2.jpg"
                 className="block size-full object-cover"
               />
             </div>
             <div className="aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
               <img
                 alt=""
-                src="/company/3.jpg"
+                src="/about-us/3.jpg"
                 className="block size-full object-cover"
               />
             </div>
             <div className="-mt-8 aspect-square overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10 lg:-mt-32">
               <img
                 alt=""
-                src="/company/4.jpg"
+                src="/about-us/4.jpg"
                 className="block size-full object-cover"
               />
             </div>
           </div>
         </div>
-        <div className="max-lg:mt-16 lg:col-span-1">
+        {/* <div className="max-lg:mt-16 lg:col-span-1">
           <Subheading>The Numbers</Subheading>
           <hr className="mt-6 border-t border-gray-200" />
           <dl className="mt-6 grid grid-cols-1 gap-x-8 gap-y-4 sm:grid-cols-2">
@@ -101,8 +113,151 @@ function Header() {
               </dd>
             </div>
           </dl>
-        </div>
+        </div> */}
       </section>
+    </Container>
+  )
+}
+
+function StorySection({
+  eyebrow,
+  title,
+  children,
+}: {
+  eyebrow: string
+  title: string
+  children: ReactNode
+}) {
+  return (
+    <section className="grid grid-cols-1 gap-8 border-t border-gray-200 py-12 first:border-t-0 first:pt-0 lg:grid-cols-[16rem_1fr] lg:gap-16 lg:py-16">
+      <div>
+        <p className="font-mono text-xs/5 font-semibold tracking-widest text-gray-400 uppercase">
+          {eyebrow}
+        </p>
+        <h2 className="mt-3 text-3xl font-medium tracking-tight text-gray-950">
+          {title}
+        </h2>
+      </div>
+      <div className="max-w-3xl text-base/7 text-gray-600">{children}</div>
+    </section>
+  )
+}
+
+function StoryList({ items }: { items: string[] }) {
+  return (
+    <ul className="mt-6 grid gap-4 text-gray-700 sm:grid-cols-3">
+      {items.map((item) => (
+        <li
+          key={item}
+          className="group relative overflow-hidden rounded-2xl bg-white/65 p-[1px] shadow-[0_10px_28px_-24px_rgba(17,24,39,0.35)] ring-1 ring-white/70 backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-26px_rgba(17,24,39,0.45)]"
+        >
+          <span
+            aria-hidden="true"
+            className="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-[#D15052]/40 to-transparent opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+          />
+          <span className="flex h-full gap-3 rounded-[calc(1rem-1px)] bg-white/70 px-4 py-4 ring-1 ring-gray-950/5">
+            <span
+              aria-hidden="true"
+              className="mt-2 size-1.5 shrink-0 rounded-full bg-[#D15052] shadow-[0_0_0_4px_rgba(209,80,82,0.12)]"
+            />
+            <span>{item}</span>
+          </span>
+        </li>
+      ))}
+    </ul>
+  )
+}
+
+function AboutUsStory() {
+  return (
+    <Container className="mt-28 mb-24 sm:mb-32">
+      <div className="relative overflow-hidden rounded-3xl bg-gray-50/80 px-6 py-10 shadow-[0_30px_100px_-70px_rgba(17,24,39,0.45)] ring-1 ring-gray-950/8 backdrop-blur-sm sm:px-10 lg:px-12">
+        <div
+          aria-hidden="true"
+          className="absolute top-0 right-0 h-40 w-80 translate-x-24 -translate-y-20 rotate-[-10deg] rounded-full bg-linear-115 from-[#fff1be] via-[#ee87cb] to-[#b060ff] opacity-40 blur-3xl"
+        />
+        <div className="relative">
+          <StorySection eyebrow="01" title="Why We Exist">
+            <p className="text-lg/8 font-medium text-gray-950">
+              Modern businesses don&apos;t fail because of lack of tools.
+            </p>
+            <p className="mt-2 text-lg/8 font-medium text-gray-950">
+              They fail because their tools don&apos;t work together.
+            </p>
+            <StoryList
+              items={[
+                'Data lives in one place',
+                'Decisions happen in another',
+                'Execution happens somewhere else',
+              ]}
+            />
+            <p className="mt-6 font-semibold text-gray-950">
+              Arivu brings all three into one system.
+            </p>
+          </StorySection>
+
+          <StorySection eyebrow="02" title="What Makes Arivu Different">
+            <div className="grid gap-5 sm:grid-cols-3">
+              {[
+                [
+                  'Built for operators, not just reporting',
+                  'Most platforms show you what happened. Arivu helps you act on it.',
+                ],
+                [
+                  'Configured, not coded',
+                  'Adapt workflows, fields, and processes without engineering effort.',
+                ],
+                [
+                  'Real-time by default',
+                  'No delays. No sync issues. Your data and actions stay live.',
+                ],
+              ].map(([heading, body]) => (
+                <div
+                  key={heading}
+                  className="group relative overflow-hidden rounded-2xl bg-white/65 p-[1px] shadow-[0_10px_28px_-24px_rgba(17,24,39,0.35)] ring-1 ring-white/70 backdrop-blur-xl transition duration-200 hover:-translate-y-0.5 hover:shadow-[0_14px_34px_-26px_rgba(17,24,39,0.45)]"
+                >
+                  <div className="h-full rounded-[calc(1rem-1px)] bg-white/70 p-5 ring-1 ring-gray-950/5">
+                    <div
+                      aria-hidden="true"
+                      className="mb-5 h-1 w-10 rounded-full bg-linear-to-r from-[#D15052] via-[#ee87cb] to-[#b060ff] opacity-80"
+                    />
+                    <h3 className="font-semibold text-gray-950">{heading}</h3>
+                    <p className="mt-3 text-sm/6 text-gray-600">{body}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </StorySection>
+
+          <StorySection eyebrow="03" title="Who It’s For">
+            <p className="text-lg/8 font-medium text-gray-950">
+              Arivu is designed for teams that are scaling fast and need
+              clarity:
+            </p>
+            <StoryList
+              items={[
+                'Operations teams managing complex workflows',
+                'Founders who want visibility without friction',
+                'Growing companies outgrowing rigid tools',
+              ]}
+            />
+          </StorySection>
+
+          <StorySection eyebrow="04" title="Our Vision">
+            <p className="text-lg/8 font-medium text-gray-950">
+              We believe business software should not just support work&mdash;it
+              should run it.
+            </p>
+            <p className="mt-6">
+              In the future, companies won&apos;t stitch together dozens of
+              tools. They&apos;ll operate on a single, adaptable system.
+            </p>
+            <p className="mt-6 font-semibold text-gray-950">
+              That&apos;s what we&apos;re building with Arivu.
+            </p>
+          </StorySection>
+        </div>
+      </div>
     </Container>
   )
 }
@@ -135,7 +290,7 @@ function Team() {
         Founded by an all-star team.
       </Heading>
       <Lead className="mt-6 max-w-3xl">
-        Radiant is founded by two of the best sellers in the business and backed
+        Arivu is founded by two of the best sellers in the business and backed
         by investors who look the other way.
       </Lead>
       <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-2">
@@ -147,12 +302,12 @@ function Team() {
             offers, they had an idea: what if they shared data to win deals and
             split the commission behind their companies’ backs? It turned out to
             be an incredible success, and that idea became the kernel for
-            Radiant.
+            Arivu.
           </p>
           <p className="mt-8 text-sm/6 text-gray-600">
-            Today, Radiant transforms revenue organizations by harnessing
+            Today, Arivu transforms revenue organizations by harnessing
             illegally acquired customer and competitor data, using it to provide
-            extraordinary leverage. More than 30,000 companies rely on Radiant
+            extraordinary leverage. More than 30,000 companies rely on Arivu
             to undercut their competitors and extort their customers, all
             through a single integrated platform.
           </p>
@@ -166,7 +321,7 @@ function Team() {
           <div className="aspect-3/2 overflow-hidden rounded-xl shadow-xl outline-1 -outline-offset-1 outline-black/10">
             <img
               alt=""
-              src="/company/5.jpg"
+              src="/about-us/5.jpg"
               className="block size-full object-cover"
             />
           </div>
@@ -456,7 +611,7 @@ function Careers() {
   )
 }
 
-export default function Company() {
+export default function AboutUs() {
   return (
     <main className="overflow-hidden">
       <GradientBackground />
@@ -464,9 +619,10 @@ export default function Company() {
         <Navbar />
       </Container>
       <Header />
-      <Team />
-      <Investors />
-      <Careers />
+      <AboutUsStory />
+      {/* <Team /> */}
+      {/* <Investors /> */}
+      {/* <Careers /> */}
       <Footer />
     </main>
   )
