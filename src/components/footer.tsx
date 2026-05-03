@@ -6,24 +6,24 @@ import { Link } from './link'
 import { Logo } from './logo'
 import { Subheading } from './text'
 
+const demoUrl = 'https://app.arivusystems.com/demo'
+
 function CallToAction() {
   return (
     <div className="relative pt-20 pb-16 text-center sm:py-24">
       <hgroup>
-        <Subheading>Get started</Subheading>
+        <Subheading>Build with Arivu</Subheading>
         <p className="mt-6 text-3xl font-medium tracking-tight text-gray-950 sm:text-5xl">
-          Ready to dive in?
-          <br />
-          Start your free trial today.
+          Run the business. Grow the market.
         </p>
       </hgroup>
-      <p className="mx-auto mt-6 max-w-xs text-sm/6 text-gray-500">
-        Get the cheat codes for selling and unlock your team&apos;s revenue
-        potential.
+      <p className="mx-auto mt-6 max-w-md text-sm/6 text-gray-500">
+        Arivu connects operations, workflows, and market execution into one
+        real-time growth system.
       </p>
       <div className="mt-6">
-        <Button className="w-full sm:w-auto" href="#">
-          Get started
+        <Button className="w-full sm:w-auto" href={demoUrl}>
+          Book a demo
         </Button>
       </div>
     </div>
@@ -55,7 +55,7 @@ function Sitemap() {
       <div>
         <SitemapHeading>Product</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="/pricing">Pricing</SitemapLink>
+          {/* <SitemapLink href="/pricing">Pricing</SitemapLink> */}
           <SitemapLink href="#">Analysis</SitemapLink>
           <SitemapLink href="#">API</SitemapLink>
         </SitemapLinks>
@@ -63,9 +63,9 @@ function Sitemap() {
       <div>
         <SitemapHeading>Company</SitemapHeading>
         <SitemapLinks>
-          <SitemapLink href="#">Careers</SitemapLink>
+          <SitemapLink href="/about-us">About Us</SitemapLink>
           <SitemapLink href="/blog">Blog</SitemapLink>
-          <SitemapLink href="/company">Company</SitemapLink>
+          <SitemapLink href="#">Careers</SitemapLink>
         </SitemapLinks>
       </div>
       <div>
@@ -76,7 +76,7 @@ function Sitemap() {
         </SitemapLinks>
       </div>
       <div>
-        <SitemapHeading>Company</SitemapHeading>
+        <SitemapHeading>Legal</SitemapHeading>
         <SitemapLinks>
           <SitemapLink href="#">Terms of service</SitemapLink>
           <SitemapLink href="#">Privacy policy</SitemapLink>
