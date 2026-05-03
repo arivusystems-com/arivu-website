@@ -1,52 +1,50 @@
-# Radiant
+# Arivu Website
 
-Radiant is a [Tailwind Plus](https://tailwindcss.com/plus) site template built using [Tailwind CSS](https://tailwindcss.com) and [Next.js](https://nextjs.org), with a blog powered by [Sanity](https://www.sanity.io).
+Marketing website and blog for Arivu Systems, built with [Next.js](https://nextjs.org), [React](https://react.dev), [Tailwind CSS](https://tailwindcss.com), and [Sanity](https://www.sanity.io).
 
-## Getting started
+## Getting Started
 
-To get started with this template, first install the npm dependencies:
+Install dependencies:
 
 ```bash
 npm install
 ```
 
-Next, create a new Sanity project to power the blog within this template:
+Create `.env.local` with the Sanity project settings:
 
 ```bash
-npm create sanity@latest -- --env=.env.local --create-project "Radiant Blog" --dataset production
+NEXT_PUBLIC_SANITY_DATASET="production"
+NEXT_PUBLIC_SANITY_PROJECT_ID="your-project-id"
 ```
 
-This will prompt you to create a new Sanity account if you don't have one already. When asked "Would you like to add configuration files for a Sanity project in this Next.js folder?", choose "n".
-
-Next, optionally import the demo seed data for the blog:
-
-```bash
-npx sanity@latest dataset import seed.tar.gz
-```
-
-Next, run the development server:
+Run the development server:
 
 ```bash
 npm run dev
 ```
 
-Finally, open [http://localhost:3000](http://localhost:3000) in your browser to view the website.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-To manage your blog content, visit the embedded Sanity Studio at [http://localhost:3000/studio](http://localhost:3000/studio).
+## Content
 
-## Customizing
+Blog content is managed through the embedded Sanity Studio:
 
-You can start editing this template by modifying the files in the `/src` folder. The site will auto-update as you edit these files.
+[http://localhost:3000/studio](http://localhost:3000/studio)
+
+If the Sanity schema changes, regenerate types with:
+
+```bash
+npm run typegen
+```
+
+## Scripts
+
+- `npm run dev` - start the local Next.js development server
+- `npm run build` - build the production site
+- `npm run start` - run the production build locally
+- `npm run lint` - run ESLint
+- `npm run typegen` - regenerate Sanity schema types
 
 ## License
 
-This site template is a commercial product and is licensed under the [Tailwind Plus license](https://tailwindcss.com/plus/license).
-
-## Learn more
-
-To learn more about the technologies used in this site template, see the following resources:
-
-- [Tailwind CSS](https://tailwindcss.com/docs) - the official Tailwind CSS documentation
-- [Next.js](https://nextjs.org/docs) - the official Next.js documentation
-- [Headless UI](https://headlessui.dev) - the official Headless UI documentation
-- [Sanity](https://www.sanity.io) - the Sanity website
+This project is licensed under the MIT License. See [LICENSE.md](LICENSE.md) for details.
