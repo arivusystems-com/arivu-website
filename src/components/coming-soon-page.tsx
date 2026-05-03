@@ -24,7 +24,7 @@ export function ComingSoonPage({
       </Container>
       <Container className="pt-16 pb-24 sm:pt-24 sm:pb-32">
         <div className="max-w-3xl">
-          <Subheading as="p">{eyebrow}</Subheading>
+          <Subheading>{eyebrow}</Subheading>
           <Heading as="h1" className="mt-4">
             {title}
           </Heading>
