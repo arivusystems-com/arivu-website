@@ -41,6 +41,7 @@ export default function RootLayout({
           data-instance="inst_chat_4a5447014d278e06836f821211372bf8"
           data-position="right"
           data-theme="light"
+          data-api-origin="https://api.arivusystems.com"
           strategy="afterInteractive"
         />
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
