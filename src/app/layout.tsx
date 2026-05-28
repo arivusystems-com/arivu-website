@@ -3,6 +3,7 @@ import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
 import '@/styles/tailwind.css'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
+import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
@@ -32,15 +33,16 @@ export default function RootLayout({
           title="The Arivu Blog"
           href="/blog/feed.xml"
         />
-        <script
+      </head>
+      <body className="text-gray-950 antialiased">
+        {children}
+        <Script
           src="https://app.arivusystems.com/embed/chat.js"
           data-instance="inst_chat_4a5447014d278e06836f821211372bf8"
           data-position="right"
           data-theme="light"
-        ></script>
-      </head>
-      <body className="text-gray-950 antialiased">
-        {children}
+          strategy="afterInteractive"
+        />
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
       </body>
     </html>
