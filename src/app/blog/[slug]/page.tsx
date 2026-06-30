@@ -1,10 +1,9 @@
-import { Button } from '@/components/button'
-import { Container } from '@/components/container'
-import { Footer } from '@/components/footer'
-import { GradientBackground } from '@/components/gradient'
 import { Link } from '@/components/link'
-import { Navbar } from '@/components/navbar'
-import { Heading, Subheading } from '@/components/text'
+import { Button } from '@/components/site/button'
+import { Container } from '@/components/site/container'
+import { SiteFooter } from '@/components/site/footer'
+import { SiteNav, SiteNavSpacer } from '@/components/site/nav'
+import { SectionHeading, SectionLabel } from '@/components/site/section'
 import { image } from '@/sanity/image'
 import { getPost } from '@/sanity/queries'
 import { ChevronLeftIcon } from '@heroicons/react/16/solid'
@@ -32,170 +31,158 @@ export default async function BlogPost({
   if (!post) notFound()
 
   return (
-    <main className="overflow-hidden">
-      <GradientBackground />
-      <Container>
-        <Navbar />
-        <Subheading className="mt-16">
-          {dayjs(post.publishedAt).format('dddd, MMMM D, YYYY')}
-        </Subheading>
-        <Heading as="h1" className="mt-2">
-          {post.title}
-        </Heading>
-        <div className="mt-16 grid grid-cols-1 gap-8 pb-24 lg:grid-cols-[15rem_1fr] xl:grid-cols-[15rem_1fr_15rem]">
-          <div className="flex flex-wrap items-center gap-8 max-lg:justify-between lg:flex-col lg:items-start">
-            {post.author && (
-              <div className="flex items-center gap-3">
-                {post.author.image && (
+    <>
+      <SiteNav />
+      <SiteNavSpacer />
+      <main>
+        <Container className="pb-24 pt-10 sm:pt-14">
+          <SectionLabel>
+            {dayjs(post.publishedAt).format('MMMM D, YYYY')}
+          </SectionLabel>
+          <SectionHeading as="h1" className="mt-4 max-w-3xl">
+            {post.title}
+          </SectionHeading>
+          <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-[15rem_1fr] xl:grid-cols-[15rem_1fr_15rem]">
+            <div className="flex flex-wrap items-center gap-8 max-lg:justify-between lg:flex-col lg:items-start">
+              {post.author && (
+                <div className="flex items-center gap-3">
+                  {post.author.image && (
+                    <img
+                      alt=""
+                      src={image(post.author.image).size(64, 64).url()}
+                      className="aspect-square size-6 rounded-full object-cover"
+                    />
+                  )}
+                  <div className="text-[13px] text-ink-secondary">
+                    {post.author.name}
+                  </div>
+                </div>
+              )}
+              {Array.isArray(post.categories) && (
+                <div className="flex flex-wrap gap-2">
+                  {post.categories.map((category) => (
+                    <Link
+                      key={category.slug}
+                      href={`/blog?category=${category.slug}`}
+                      className="rounded-md border border-border bg-surface-muted px-2.5 py-1 text-[13px] font-medium text-ink-secondary"
+                    >
+                      {category.title}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+            <div className="text-ink-secondary">
+              <div className="max-w-2xl xl:mx-auto">
+                {post.mainImage && (
                   <img
-                    alt=""
-                    src={image(post.author.image).size(64, 64).url()}
-                    className="aspect-square size-6 rounded-full object-cover"
+                    alt={post.mainImage.alt || ''}
+                    src={image(post.mainImage).size(2016, 1344).url()}
+                    className="mb-10 aspect-3/2 w-full rounded-xl object-cover"
                   />
                 )}
-                <div className="text-sm/5 text-gray-700">
-                  {post.author.name}
-                </div>
-              </div>
-            )}
-            {Array.isArray(post.categories) && (
-              <div className="flex flex-wrap gap-2">
-                {post.categories.map((category) => (
-                  <Link
-                    key={category.slug}
-                    href={`/blog?category=${category.slug}`}
-                    className="rounded-full border border-dotted border-gray-300 bg-gray-50 px-2 text-sm/6 font-medium text-gray-500"
-                  >
-                    {category.title}
-                  </Link>
-                ))}
-              </div>
-            )}
-          </div>
-          <div className="text-gray-700">
-            <div className="max-w-2xl xl:mx-auto">
-              {post.mainImage && (
-                <img
-                  alt={post.mainImage.alt || ''}
-                  src={image(post.mainImage).size(2016, 1344).url()}
-                  className="mb-10 aspect-3/2 w-full rounded-2xl object-cover shadow-xl"
-                />
-              )}
-              {post.body && (
-                <PortableText
-                  value={post.body}
-                  components={{
-                    block: {
-                      normal: ({ children }) => (
-                        <p className="my-10 text-base/8 first:mt-0 last:mb-0">
-                          {children}
-                        </p>
-                      ),
-                      h2: ({ children }) => (
-                        <h2 className="mt-12 mb-10 text-2xl/8 font-medium tracking-tight text-gray-950 first:mt-0 last:mb-0">
-                          {children}
-                        </h2>
-                      ),
-                      h3: ({ children }) => (
-                        <h3 className="mt-12 mb-10 text-xl/8 font-medium tracking-tight text-gray-950 first:mt-0 last:mb-0">
-                          {children}
-                        </h3>
-                      ),
-                      blockquote: ({ children }) => (
-                        <blockquote className="my-10 border-l-2 border-l-gray-300 pl-6 text-base/8 text-gray-950 first:mt-0 last:mb-0">
-                          {children}
-                        </blockquote>
-                      ),
-                    },
-                    types: {
-                      image: ({ value }) => (
-                        <img
-                          alt={value.alt || ''}
-                          src={image(value).width(2000).url()}
-                          className="w-full rounded-2xl"
-                        />
-                      ),
-                      separator: ({ value }) => {
-                        switch (value.style) {
-                          case 'line':
-                            return (
-                              <hr className="my-8 border-t border-gray-200" />
-                            )
-                          case 'space':
-                            return <div className="my-8" />
-                          default:
-                            return null
-                        }
-                      },
-                    },
-                    list: {
-                      bullet: ({ children }) => (
-                        <ul className="list-disc pl-4 text-base/8 marker:text-gray-400">
-                          {children}
-                        </ul>
-                      ),
-                      number: ({ children }) => (
-                        <ol className="list-decimal pl-4 text-base/8 marker:text-gray-400">
-                          {children}
-                        </ol>
-                      ),
-                    },
-                    listItem: {
-                      bullet: ({ children }) => {
-                        return (
-                          <li className="my-2 pl-2 has-[br]:mb-8">
+                {post.body && (
+                  <PortableText
+                    value={post.body}
+                    components={{
+                      block: {
+                        normal: ({ children }) => (
+                          <p className="my-8 text-[16px] leading-8 first:mt-0 last:mb-0">
                             {children}
-                          </li>
-                        )
-                      },
-                      number: ({ children }) => {
-                        return (
-                          <li className="my-2 pl-2 has-[br]:mb-8">
+                          </p>
+                        ),
+                        h2: ({ children }) => (
+                          <h2 className="mt-12 mb-8 text-2xl font-semibold tracking-[-0.02em] text-ink first:mt-0 last:mb-0">
                             {children}
-                          </li>
-                        )
+                          </h2>
+                        ),
+                        h3: ({ children }) => (
+                          <h3 className="mt-10 mb-6 text-xl font-semibold tracking-[-0.02em] text-ink first:mt-0 last:mb-0">
+                            {children}
+                          </h3>
+                        ),
+                        blockquote: ({ children }) => (
+                          <blockquote className="my-8 border-l-2 border-border-strong pl-6 text-[16px] leading-8 text-ink first:mt-0 last:mb-0">
+                            {children}
+                          </blockquote>
+                        ),
                       },
-                    },
-                    marks: {
-                      strong: ({ children }) => (
-                        <strong className="font-semibold text-gray-950">
-                          {children}
-                        </strong>
-                      ),
-                      code: ({ children }) => (
-                        <>
-                          <span aria-hidden>`</span>
-                          <code className="text-[15px]/8 font-semibold text-gray-950">
+                      types: {
+                        image: ({ value }) => (
+                          <img
+                            alt={value.alt || ''}
+                            src={image(value).width(2000).url()}
+                            className="w-full rounded-xl"
+                          />
+                        ),
+                        separator: ({ value }) => {
+                          switch (value.style) {
+                            case 'line':
+                              return (
+                                <hr className="my-8 border-t border-border" />
+                              )
+                            case 'space':
+                              return <div className="my-8" />
+                            default:
+                              return null
+                          }
+                        },
+                      },
+                      list: {
+                        bullet: ({ children }) => (
+                          <ul className="list-disc pl-4 text-[16px] leading-8 marker:text-ink-tertiary">
+                            {children}
+                          </ul>
+                        ),
+                        number: ({ children }) => (
+                          <ol className="list-decimal pl-4 text-[16px] leading-8 marker:text-ink-tertiary">
+                            {children}
+                          </ol>
+                        ),
+                      },
+                      listItem: {
+                        bullet: ({ children }) => (
+                          <li className="my-2 pl-2">{children}</li>
+                        ),
+                        number: ({ children }) => (
+                          <li className="my-2 pl-2">{children}</li>
+                        ),
+                      },
+                      marks: {
+                        strong: ({ children }) => (
+                          <strong className="font-semibold text-ink">
+                            {children}
+                          </strong>
+                        ),
+                        code: ({ children }) => (
+                          <code className="rounded bg-surface-muted px-1.5 py-0.5 text-[14px] font-medium text-ink">
                             {children}
                           </code>
-                          <span aria-hidden>`</span>
-                        </>
-                      ),
-                      link: ({ value, children }) => {
-                        return (
+                        ),
+                        link: ({ value, children }) => (
                           <Link
                             href={value.href}
-                            className="font-medium text-gray-950 underline decoration-gray-400 underline-offset-4 data-hover:decoration-gray-600"
+                            className="font-medium text-ink underline decoration-border-strong underline-offset-4 data-hover:decoration-ink-secondary"
                           >
                             {children}
                           </Link>
-                        )
+                        ),
                       },
-                    },
-                  }}
-                />
-              )}
-              <div className="mt-10">
-                <Button variant="outline" href="/blog">
-                  <ChevronLeftIcon className="size-4" />
-                  Back to blog
-                </Button>
+                    }}
+                  />
+                )}
+                <div className="mt-10">
+                  <Button variant="secondary" href="/blog">
+                    <ChevronLeftIcon className="size-4" />
+                    Back to blog
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </Container>
-      <Footer />
-    </main>
+        </Container>
+      </main>
+      <SiteFooter />
+    </>
   )
 }

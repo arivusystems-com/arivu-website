@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1500" viewBox="0 0 2400 1500" fill="none">
+  <rect width="2400" height="1500" fill="#F7F7F5"/>
+  <rect x="0" y="0" width="280" height="1500" fill="#FFFFFF"/>
+  <rect x="280" y="0" width="1" height="1500" fill="#E9E9E7"/>
+  <rect x="24" y="28" width="120" height="32" rx="8" fill="#EEF2FF"/>
+  <text x="84" y="49" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#4F46E5">Arivu</text>
+  <text x="24" y="96" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#9B9A97" letter-spacing="0.08em">APPS</text>
+  <rect x="16" y="112" width="248" height="40" rx="8" fill="#EEF2FF"/>
+  <circle cx="40" cy="132" r="6" fill="#4F46E5"/>
+  <text x="56" y="137" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#4F46E5">Sales</text>
+  <text x="56" y="177" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#787774">Helpdesk</text>
+  <text x="56" y="217" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#787774">Projects</text>
+  <text x="56" y="257" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#787774">Inventory</text>
+  <text x="56" y="297" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#787774">Field Sales</text>
+  <rect x="312" y="24" width="2056" height="64" rx="12" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <text x="336" y="64" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="600" fill="#37352F">Sales workspace</text>
+  <rect x="1900" y="36" width="120" height="40" rx="8" fill="#4F46E5"/>
+  <text x="1960" y="62" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#FFFFFF">New lead</text>
+  <rect x="2040" y="36" width="100" height="40" rx="8" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <text x="2090" y="62" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="500" fill="#37352F">Filter</text>
+  <rect x="312" y="112" width="640" height="132" rx="16" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <text x="336" y="148" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9B9A97">ACTIVE PIPELINE</text>
+  <text x="336" y="196" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="600" fill="#37352F">24</text>
+  <text x="336" y="224" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#787774">Leads in progress</text>
+  <rect x="976" y="112" width="640" height="132" rx="16" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <text x="1000" y="148" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9B9A97">CONVERSION</text>
+  <text x="1000" y="196" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="600" fill="#37352F">68%</text>
+  <text x="1000" y="224" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#787774">This quarter</text>
+  <rect x="1640" y="112" width="728" height="132" rx="16" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <text x="1664" y="148" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#9B9A97">CONNECTED</text>
+  <text x="1664" y="196" font-family="Inter, system-ui, sans-serif" font-size="36" font-weight="600" fill="#4F46E5">6 apps</text>
+  <text x="1664" y="224" font-family="Inter, system-ui, sans-serif" font-size="14" fill="#787774">Shared process layer</text>
+  <rect x="312" y="272" width="2056" height="1180" rx="16" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <text x="336" y="320" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600" fill="#37352F">Today's processes</text>
+  <rect x="336" y="344" width="2008" height="48" rx="8" fill="#F7F7F5"/>
+  <text x="360" y="374" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9B9A97">PROCESS</text>
+  <text x="760" y="374" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9B9A97">OWNER</text>
+  <text x="1120" y="374" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9B9A97">STAGE</text>
+  <text x="1480" y="374" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9B9A97">STATUS</text>
+  <text x="1840" y="374" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#9B9A97">APP</text>
+  <rect x="336" y="412" width="2008" height="72" rx="10" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <circle cx="360" cy="448" r="5" fill="#4F46E5"/>
+  <text x="380" y="454" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#37352F">Enterprise enquiry  Acme Corp</text>
+  <text x="760" y="454" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Priya Sharma</text>
+  <text x="1120" y="454" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Qualification</text>
+  <rect x="1480" y="432" width="96" height="32" rx="16" fill="#EEF2FF"/>
+  <text x="1528" y="453" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#4F46E5">Active</text>
+  <text x="1840" y="454" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Sales</text>
+  <rect x="336" y="500" width="2008" height="72" rx="10" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <circle cx="360" cy="536" r="5" fill="#9B9A97"/>
+  <text x="380" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#37352F">Support ticket #2841</text>
+  <text x="760" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Arjun Mehta</text>
+  <text x="1120" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Assigned</text>
+  <rect x="1480" y="520" width="110" height="32" rx="16" fill="#F7F7F5"/>
+  <text x="1535" y="541" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#787774">In progress</text>
+  <text x="1840" y="542" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Helpdesk</text>
+  <rect x="336" y="588" width="2008" height="72" rx="10" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <circle cx="360" cy="624" r="5" fill="#9B9A97"/>
+  <text x="380" y="630" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#37352F">Website redesign  Phase 2</text>
+  <text x="760" y="630" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Design team</text>
+  <text x="1120" y="630" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Delivery</text>
+  <rect x="1480" y="608" width="88" height="32" rx="16" fill="#F7F7F5"/>
+  <text x="1524" y="629" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#787774">On track</text>
+  <text x="1840" y="630" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Projects</text>
+  <rect x="336" y="676" width="2008" height="72" rx="10" fill="#FFFFFF" stroke="#E9E9E7"/>
+  <circle cx="360" cy="712" r="5" fill="#9B9A97"/>
+  <text x="380" y="718" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="500" fill="#37352F">Warehouse stock reconciliation</text>
+  <text x="760" y="718" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Ops team</text>
+  <text x="1120" y="718" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Review</text>
+  <rect x="1480" y="696" width="104" height="32" rx="16" fill="#F7F7F5"/>
+  <text x="1532" y="717" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="500" fill="#787774">Scheduled</text>
+  <text x="1840" y="718" font-family="Inter, system-ui, sans-serif" font-size="15" fill="#787774">Inventory</text>
+</svg>

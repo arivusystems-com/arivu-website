@@ -1,0 +1,8 @@
+export { AudienceSection } from './audience-section'
+export { CtaSection } from './cta-section'
+export { HeroSection } from './hero-section'
+export { PlatformSection } from './platform-section'
+export { ProblemSection } from './problem-section'
+export { ProcessSection } from './process-section'
+export { WhyChooseSection } from './why-choose-section'
+export { WorkspaceProofSection } from './workspace-proof-section'
