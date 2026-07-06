@@ -29,8 +29,7 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files
-.env
+# env files (local overrides and secrets — keep .env committed for public vars)
 .env*.local
 
 # vercel

@@ -10,19 +10,16 @@ Install dependencies:
 npm install
 ```
 
-Create `.env.local` with the Sanity project settings:
+Public Sanity settings live in `.env` (committed). Copy `.env.example` to `.env.local` for local secrets and overrides:
 
 ```bash
-NEXT_PUBLIC_SANITY_DATASET="production"
-NEXT_PUBLIC_SANITY_PROJECT_ID="your-project-id"
-
-# Optional: enables draft previews and live content revalidation
-SANITY_API_READ_TOKEN="your-viewer-token"
-
-# Optional: load the Arivu chat widget (omit until the instance is enabled)
-# NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY="inst_chat_..."
-# NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN="https://app.arivusystems.com"
+cp .env.example .env.local
 ```
+
+Set optional values in `.env.local` or in your deploy environment (e.g. Vercel project settings):
+
+- `SANITY_API_READ_TOKEN` — draft previews and live content revalidation
+- `NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY` / `NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN` — chat widget
 
 ### Sanity CORS (required for live content)
 
