@@ -261,7 +261,7 @@ export const reviewCards = [
 ]
 
 export const differentiatorsMeta = {
-  heading: 'Built around your process.',
+  heading: "How we're different",
   lead:
     "We're not another software company. One connected platform built for how you work-not rigid modules.",
 } as const
