@@ -242,7 +242,7 @@ function AppTileContent({
         fill="#5c6370"
         fontSize="11"
         fontWeight="700"
-        style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+        style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}
       >
         {name}
       </text>
@@ -392,7 +392,7 @@ export function OperatingSystemIllustration() {
               fill="#1a1f36"
               fontSize="11"
               fontWeight="600"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}
             >
               One Platform.
             </text>
@@ -403,7 +403,7 @@ export function OperatingSystemIllustration() {
               fill="#5c6370"
               fontSize="10"
               fontWeight="500"
-              style={{ fontFamily: 'Inter, system-ui, sans-serif' }}
+              style={{ fontFamily: 'var(--font-geist-sans), system-ui, sans-serif' }}
             >
               Every Process.
             </text>

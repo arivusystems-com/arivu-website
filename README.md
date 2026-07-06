@@ -21,7 +21,7 @@ SANITY_API_READ_TOKEN="your-viewer-token"
 
 # Optional: load the Arivu chat widget (omit until the instance is enabled)
 # NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY="inst_chat_..."
-# NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN="https://api.arivusystems.com"
+# NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN="https://app.arivusystems.com"
 ```
 
 ### Sanity CORS (required for live content)

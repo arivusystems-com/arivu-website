@@ -1,12 +1,14 @@
 import {
-  AudienceSection,
-  CtaSection,
+  DifferentiatorsSection,
+  FaqSection,
+  FeaturesTabsSection,
   HeroSection,
+  IndustriesSection,
+  // LogosMarqueeSection,
   PlatformSection,
-  ProblemSection,
-  ProcessSection,
-  WhyChooseSection,
-  WorkspaceProofSection,
+  // TestimonialsSection,
+  TransformationSection,
+  WhyTeamsChooseSection,
 } from '@/components/home'
 import { SiteFooter } from '@/components/site/footer'
 import type { Metadata } from 'next'
@@ -22,13 +24,15 @@ export default function Home() {
     <>
       <HeroSection />
       <main>
-        <ProblemSection />
+        <TransformationSection />
         <PlatformSection />
-        <ProcessSection />
-        <WorkspaceProofSection />
-        <WhyChooseSection />
-        <AudienceSection />
-        <CtaSection />
+        <WhyTeamsChooseSection />
+        {/* <LogosMarqueeSection /> */}
+        <FeaturesTabsSection />
+        <IndustriesSection />
+        {/* <TestimonialsSection /> */}
+        <DifferentiatorsSection />
+        <FaqSection />
       </main>
       <SiteFooter />
     </>

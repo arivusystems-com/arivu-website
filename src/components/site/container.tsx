@@ -17,7 +17,7 @@ export function Container({
         className={clsx(
           'mx-auto',
           narrow && 'max-w-3xl',
-          wide && 'max-w-[1080px]',
+          wide && 'max-w-[1240px]',
           !narrow && !wide && 'max-w-[960px]',
         )}
       >

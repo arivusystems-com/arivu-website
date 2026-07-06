@@ -35,7 +35,7 @@ export default async function BlogPost({
       <SiteNav />
       <SiteNavSpacer />
       <main>
-        <Container className="pb-24 pt-10 sm:pt-14">
+        <Container wide className="pb-24 pt-10 sm:pt-14">
           <SectionLabel>
             {dayjs(post.publishedAt).format('MMMM D, YYYY')}
           </SectionLabel>

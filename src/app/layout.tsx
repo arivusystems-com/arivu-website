@@ -1,6 +1,7 @@
 import { SanityLive } from '@/sanity/live'
 import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
 import '@/styles/tailwind.css'
+import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
@@ -23,18 +24,8 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={GeistSans.variable}>
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap"
-          rel="stylesheet"
-        />
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -42,7 +33,7 @@ export default function RootLayout({
           href="/blog/feed.xml"
         />
       </head>
-      <body className="bg-surface font-sans text-ink antialiased [font-feature-settings:'cv01','cv03','cv04','cv11']">
+      <body className="bg-page font-sans text-ink antialiased">
         {children}
         {process.env.NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY ? (
           <Script
@@ -52,7 +43,7 @@ export default function RootLayout({
             data-theme="light"
             data-api-origin={
               process.env.NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN ??
-              'https://api.arivusystems.com'
+              'https://app.arivusystems.com'
             }
             strategy="afterInteractive"
           />

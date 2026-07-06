@@ -42,7 +42,7 @@ async function FeaturedPosts() {
 
   return (
     <div className="mt-16 border-t border-border bg-surface-muted pb-14 pt-14">
-      <Container>
+      <Container wide>
         <h2 className="text-[15px] font-semibold text-ink">Start here</h2>
         <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-3">
           {featuredPosts.map((post) => (
@@ -144,7 +144,7 @@ async function Posts({ page, category }: { page: number; category?: string }) {
               </div>
             )}
           </div>
-          <div className="sm:col-span-2 sm:max-w-2xl">
+          <div className="sm:col-span-2">
             <h2 className="text-[15px] font-semibold text-ink">{post.title}</h2>
             <p className="mt-3 text-[14px] leading-6 text-ink-secondary">
               {post.excerpt}
@@ -248,7 +248,7 @@ export default async function Blog({
       <SiteNav />
       <SiteNavSpacer />
       <main>
-        <Container className="pb-6 pt-10 sm:pt-14">
+        <Container wide className="pb-6 pt-10 sm:pt-14">
           <SectionLabel>Blog</SectionLabel>
           <SectionHeading as="h1" className="mt-4">
             Clarity, not content.
@@ -259,7 +259,7 @@ export default async function Blog({
           </SectionLead>
         </Container>
         {page === 1 && !category && <FeaturedPosts />}
-        <Container className="mt-10 pb-24">
+        <Container wide className="mt-10 pb-24">
           <Categories selected={category} />
           <Posts page={page} category={category} />
           <Pagination page={page} category={category} />
