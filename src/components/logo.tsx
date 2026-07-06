@@ -1,6 +1,15 @@
 import { clsx } from 'clsx'
 
-export function Logo({ className }: { className?: string }) {
+export function Logo({
+  className,
+  light,
+}: {
+  className?: string
+  light?: boolean
+}) {
+  const mark = light ? '/logo/Logo_light.svg' : '/logo/Logo_dark.svg'
+  const word = light ? '/logo/Logo_word_light.svg' : '/logo/Logo_word_dark.svg'
+
   return (
     <span
       aria-label="Arivu"
@@ -8,7 +17,7 @@ export function Logo({ className }: { className?: string }) {
       className={clsx(className, 'inline-flex items-center')}
     >
       <img
-        src="/logo/Logo_dark.svg"
+        src={mark}
         alt=""
         width={418}
         height={550}
@@ -22,7 +31,7 @@ export function Logo({ className }: { className?: string }) {
         focusable="false"
         className="h-full w-auto shrink-0"
       >
-        <image href="/logo/Logo_word_dark.svg" width="1050" height="550" />
+        <image href={word} width="1050" height="550" />
       </svg>
     </span>
   )

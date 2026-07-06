@@ -10,11 +10,28 @@ Install dependencies:
 npm install
 ```
 
-Create `.env.local` with the Sanity project settings:
+Public Sanity settings live in `.env` (committed). Copy `.env.example` to `.env.local` for local secrets and overrides:
 
 ```bash
-NEXT_PUBLIC_SANITY_DATASET="production"
-NEXT_PUBLIC_SANITY_PROJECT_ID="your-project-id"
+cp .env.example .env.local
+```
+
+Set optional values in `.env.local` or in your deploy environment (e.g. Vercel project settings):
+
+- `SANITY_API_READ_TOKEN` — draft previews and live content revalidation
+- `NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY` / `NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN` — chat widget
+
+### Sanity CORS (required for live content)
+
+The `<SanityLive />` component subscribes to Sanity from the browser. Add your dev and production origins in [Sanity Manage](https://www.sanity.io/manage) under **API → CORS origins**, with **Allow credentials** enabled:
+
+- `http://localhost:3000`
+- Your production site URL (e.g. `https://arivusystems.com`)
+
+Or after `npx sanity login`:
+
+```bash
+npx sanity cors add http://localhost:3000 --credentials
 ```
 
 Run the development server:

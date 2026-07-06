@@ -1,15 +1,18 @@
 import { SanityLive } from '@/sanity/live'
 import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
 import '@/styles/tailwind.css'
+import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import Script from 'next/script'
 
 export const metadata: Metadata = {
   title: {
-    template: '%s - Arivu',
-    default: 'Arivu - Connected Growth System',
+    template: '%s · Arivu',
+    default: 'Arivu — Everything to Grow',
   },
+  description:
+    'Arivu is a process-first platform that helps businesses structure operations, simplify execution, and scale through connected business applications.',
   icons: {
     icon: '/icon.svg',
   },
@@ -21,12 +24,8 @@ export default function RootLayout({
   children: ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={GeistSans.variable}>
       <head>
-        <link
-          rel="stylesheet"
-          href="https://api.fontshare.com/css?f%5B%5D=switzer@400,500,600,700&amp;display=swap"
-        />
         <link
           rel="alternate"
           type="application/rss+xml"
@@ -34,16 +33,21 @@ export default function RootLayout({
           href="/blog/feed.xml"
         />
       </head>
-      <body className="text-gray-950 antialiased">
+      <body className="bg-page font-sans text-ink antialiased">
         {children}
-        <Script
-          src="https://app.arivusystems.com/embed/chat.js"
-          data-instance="inst_chat_4a5447014d278e06836f821211372bf8"
-          data-position="right"
-          data-theme="light"
-          data-api-origin="https://api.arivusystems.com"
-          strategy="afterInteractive"
-        />
+        {process.env.NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY ? (
+          <Script
+            src="https://app.arivusystems.com/embed/chat.js"
+            data-instance={process.env.NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY}
+            data-position="right"
+            data-theme="light"
+            data-api-origin={
+              process.env.NEXT_PUBLIC_ARIVU_CHAT_API_ORIGIN ??
+              'https://app.arivusystems.com'
+            }
+            strategy="afterInteractive"
+          />
+        ) : null}
         <SanityLive revalidateSyncTags={revalidateSyncTags} />
       </body>
     </html>

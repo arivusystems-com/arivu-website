@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from '@/components/button'
+import { Button } from '@/components/site/button'
 import { Link } from '@/components/link'
 import type { CATEGORIES_QUERYResult } from '@/sanity/types'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
@@ -56,7 +56,7 @@ export function BlogCategoriesMenu({
           ))}
         </MenuItems>
       </Menu>
-      <Button variant="outline" href="/blog/feed.xml" className="gap-1">
+      <Button variant="secondary" href="/blog/feed.xml" className="gap-1">
         <RssIcon className="size-4" />
         RSS Feed
       </Button>
