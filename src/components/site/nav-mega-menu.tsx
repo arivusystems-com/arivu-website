@@ -528,6 +528,23 @@ export const navMenus: NavMenu[] = [
             ),
           },
           {
+            label: 'Help center',
+            href: '/help',
+            iconBg: 'bg-sky-500',
+            icon: (
+              <svg viewBox="0 0 16 16" className="size-3" aria-hidden="true">
+                <circle cx="8" cy="8" r="4.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
+                <path
+                  d="M6.25 6.25c0-1 .75-1.75 1.75-1.75s1.75.6 1.75 1.5c0 1.25-1.75 1.25-1.75 2.5M8 11.25v.25"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ),
+          },
+          {
             label: 'FAQ',
             href: '#',
             iconBg: 'bg-violet-500',

@@ -186,6 +186,9 @@ export function SiteNav({ theme = 'default' }: { theme?: 'default' | 'dark' }) {
   let effectiveTone = isDarkNav ? 1 : navTone
   let lightGlassOpacity = isDarkNav ? 0 : (1 - navTone) * (showGlass ? 1 : 0)
   let darkGlassOpacity = isDarkNav ? 1 : navTone
+  let glassInsetClass = showGlass
+    ? '-left-2 -right-2 lg:-left-2 lg:-right-2'
+    : 'left-0 right-0'
   let linkRgb = mixRgb(effectiveTone, [0x5c, 0x63, 0x70], [0xff, 0xff, 0xff])
   let linkColor = `rgb(${linkRgb.join(' ')})`
   let loginTextRgb = mixRgb(effectiveTone, [0x1a, 0x1f, 0x36], [0xff, 0xff, 0xff])
@@ -202,7 +205,7 @@ export function SiteNav({ theme = 'default' }: { theme?: 'default' | 'dark' }) {
           <>
             <div
               className={clsx(
-                'fixed z-50 w-full transition-transform duration-300 ease-out will-change-transform',
+                'fixed z-50 w-full px-6 transition-transform duration-300 ease-out will-change-transform lg:px-10',
                 'min-h-16 lg:top-5 lg:min-h-12',
                 visible
                   ? 'translate-y-0'
@@ -211,21 +214,25 @@ export function SiteNav({ theme = 'default' }: { theme?: 'default' | 'dark' }) {
             >
               <div
                 ref={navShellRef}
-                className="relative mx-auto h-full max-w-[1240px] px-0 lg:px-3"
+                className="relative mx-auto h-full w-full max-w-[1240px]"
               >
-                <div className="relative flex h-16 items-center justify-between gap-3 px-4 lg:h-12 lg:px-5 xl:gap-4">
+                <div className="relative flex h-16 items-center justify-between gap-3 lg:h-12 xl:gap-4">
                   <div
                     aria-hidden="true"
-                    className="pointer-events-none absolute inset-0 rounded-2xl border border-black/[0.07] bg-white/68 shadow-soft backdrop-blur-2xl backdrop-saturate-150 transition-opacity duration-500 ease-out"
+                    className={clsx(
+                      'pointer-events-none absolute inset-y-0 rounded-2xl border border-black/[0.07] bg-white/68 shadow-soft backdrop-blur-2xl backdrop-saturate-150 transition-[opacity,left,right] duration-500 ease-out',
+                      glassInsetClass,
+                    )}
                     style={{ opacity: lightGlassOpacity }}
                   />
                   <div
                     aria-hidden="true"
                     className={clsx(
-                      'pointer-events-none absolute inset-0 rounded-2xl border backdrop-blur-2xl backdrop-saturate-150 transition-opacity duration-500 ease-out',
+                      'pointer-events-none absolute inset-y-0 rounded-2xl border backdrop-blur-2xl backdrop-saturate-150 transition-[opacity,left,right] duration-500 ease-out',
                       isDarkNav
                         ? 'border-white/10 bg-black/75 shadow-[0_8px_32px_rgb(0_0_0/0.45)]'
                         : 'border-white/12 bg-black/35 shadow-[0_8px_32px_rgb(0_0_0/0.28)]',
+                      glassInsetClass,
                     )}
                     style={{ opacity: darkGlassOpacity }}
                   />
@@ -372,7 +379,7 @@ export function SiteNav({ theme = 'default' }: { theme?: 'default' | 'dark' }) {
 
             <DisclosurePanel
               className={clsx(
-                'fixed inset-x-0 top-16 z-40 px-6 py-5 backdrop-blur-xl lg:top-[4.25rem]',
+                'fixed inset-x-0 top-16 z-40 px-6 py-5 backdrop-blur-xl lg:top-[4.25rem] lg:px-10',
                 isDarkNav
                   ? 'border-b border-white/10 bg-black/95'
                   : 'border-b border-border/50 bg-white/95',
