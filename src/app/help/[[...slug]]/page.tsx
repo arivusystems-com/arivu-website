@@ -8,7 +8,6 @@ import {
   buildHelpPathname,
   buildStaticSlugParams,
   fetchHomeExport,
-  pickPageHtml,
   resolveHelpPage,
 } from '../../../lib/arivu-help';
 
@@ -57,16 +56,8 @@ export default async function HelpPage({
   const { slug = [] } = await params;
   const pathname = buildHelpPathname(PATH_PREFIX, slug);
 
-  if (slug.length === 0) {
-    const home = await fetchHomeExport();
-    if (!home) {
-      notFound();
-    }
-  } else {
-    const resolved = await resolveHelpPage(slug);
-    if (!pickPageHtml(resolved?.data ?? null)) {
-      notFound();
-    }
+  if (!API_ORIGIN || !ORG) {
+    notFound();
   }
 
   return (
