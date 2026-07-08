@@ -1,16 +1,29 @@
-import {
-  HELP_EMBED_API_ORIGIN,
-  HELP_EMBED_CSS,
-  HELP_EMBED_SCRIPT,
-} from '@/lib/help-embed'
-import type { ReactNode } from 'react'
+import { Container } from '@/components/site/container';
+import { SiteFooter } from '@/components/site/footer';
+import { SiteNav, SiteNavSpacer } from '@/components/site/nav';
+import ArivuHelpAssets from './ArivuHelpAssets';
 
-export default function HelpLayout({ children }: { children: ReactNode }) {
+const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
+
+export default function HelpLayout({ children }: { children: React.ReactNode }) {
+  const stylesheetOrigin = API_ORIGIN.replace(/\/$/, '');
+
   return (
     <>
-      <link rel="preload" href={HELP_EMBED_CSS} as="style" />
-      <link rel="stylesheet" href={HELP_EMBED_CSS} />
-      {children}
+      {stylesheetOrigin ? (
+        <link rel="stylesheet" href={`${stylesheetOrigin}/embed/headless-blocks.css`} />
+      ) : null}
+      <div className="flex min-h-screen flex-col bg-page">
+        <SiteNav />
+        <SiteNavSpacer />
+        <main className="flex flex-1 flex-col pb-24 pt-10 sm:pt-14">
+          <Container wide>
+            <div className="ld-help-site ld-help-root ld-help-embed">{children}</div>
+          </Container>
+        </main>
+        <SiteFooter />
+      </div>
+      <ArivuHelpAssets apiOrigin={API_ORIGIN} />
     </>
-  )
+  );
 }

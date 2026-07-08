@@ -137,3 +137,9 @@ body {
     transform: none;
   }
 }
+
+.ld-help-site .ld-help-page,
+.ld-help-site .ld-help-home {
+  max-width: none;
+  padding-inline: 0;
+}
