@@ -1,9 +1,6 @@
-export const API_ORIGIN =
-  process.env.ARIVU_API_ORIGIN ?? 'https://app.arivusystems.com';
-export const ORG =
-  process.env.ARIVU_ORG ?? 'art_pub_ee6d481a167b1b88ffd36ce13ec9a842';
-export const PATH_PREFIX = process.env.HELP_URL_PREFIX ?? '/help/';
-export const SITE_ORIGIN = process.env.SITE_ORIGIN ?? 'https://arivusystems.com';
+const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
+const ORG = process.env.ARIVU_ORG || '';
+const PATH_PREFIX = process.env.HELP_URL_PREFIX || '/help/';
 
 export type ExportMeta = {
   title?: string;
@@ -33,8 +30,7 @@ type ManifestData = {
   articles?: ManifestArticle[];
 };
 
-function contentBase(): string | null {
-  if (!API_ORIGIN || !ORG) return null;
+function contentBase(): string {
   return `${API_ORIGIN.replace(/\/$/, '')}/api/public/v1/content/${encodeURIComponent(ORG)}`;
 }
 
@@ -58,36 +54,28 @@ async function fetchExportJson<T>(url: string): Promise<T | null> {
 }
 
 export async function fetchHomeExport(): Promise<ExportPayload | null> {
-  const base = contentBase();
-  if (!base) return null;
-  return fetchExportJson(`${base}/export/home${buildQuery()}`);
+  return fetchExportJson(`${contentBase()}/export/home${buildQuery()}`);
 }
 
 export async function fetchCollectionExport(
   slug: string,
   parentSlug = '',
 ): Promise<ExportPayload | null> {
-  const base = contentBase();
-  if (!base) return null;
   const query = parentSlug ? buildQuery({ parent: parentSlug }) : buildQuery();
   return fetchExportJson(
-    `${base}/export/collections/${encodeURIComponent(slug)}${query}`,
+    `${contentBase()}/export/collections/${encodeURIComponent(slug)}${query}`,
   );
 }
 
 export async function fetchArticleExport(articleSlug: string): Promise<ExportPayload | null> {
-  const base = contentBase();
-  if (!base) return null;
   return fetchExportJson(
-    `${base}/articles/${encodeURIComponent(articleSlug)}/export${buildQuery()}`,
+    `${contentBase()}/articles/${encodeURIComponent(articleSlug)}/export${buildQuery()}`,
   );
 }
 
 export async function fetchManifest(): Promise<ManifestData | null> {
-  const base = contentBase();
-  if (!base) return null;
   const params = new URLSearchParams({ pathPrefix: PATH_PREFIX });
-  return fetchExportJson(`${base}/manifest.json?${params.toString()}`);
+  return fetchExportJson(`${contentBase()}/manifest.json?${params.toString()}`);
 }
 
 export function pickPageHtml(data: ExportPayload | null): string {
@@ -153,13 +141,11 @@ export async function buildStaticSlugParams(): Promise<Array<{ slug: string[] }>
 }
 
 export async function fetchStaticSitemapXml(): Promise<string | null> {
-  const base = contentBase();
-  if (!base) return null;
   const params = new URLSearchParams({
     pathPrefix: PATH_PREFIX,
-    siteOrigin: SITE_ORIGIN,
+    siteOrigin: process.env.SITE_ORIGIN || '',
   });
-  const response = await fetch(`${base}/export/sitemap.xml?${params.toString()}`, {
+  const response = await fetch(`${contentBase()}/export/sitemap.xml?${params.toString()}`, {
     next: { revalidate: 3600 },
   });
   if (!response.ok) return null;
