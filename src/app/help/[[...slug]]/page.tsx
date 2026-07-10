@@ -2,16 +2,14 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ArivuHelpEmbed from '../ArivuHelpEmbed';
 import {
+  API_ORIGIN,
+  ORG,
+  PATH_PREFIX,
   buildHelpPathname,
   buildStaticSlugParams,
   fetchHomeExport,
-  pickPageHtml,
   resolveHelpPage,
 } from '../../../lib/arivu-help';
-
-const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
-const ORG = process.env.ARIVU_ORG || '';
-const PATH_PREFIX = process.env.HELP_URL_PREFIX || '/help/';
 
 export async function generateStaticParams() {
   return buildStaticSlugParams();
@@ -58,16 +56,8 @@ export default async function HelpPage({
   const { slug = [] } = await params;
   const pathname = buildHelpPathname(PATH_PREFIX, slug);
 
-  if (slug.length === 0) {
-    const home = await fetchHomeExport();
-    if (!home) {
-      notFound();
-    }
-  } else {
-    const resolved = await resolveHelpPage(slug);
-    if (!pickPageHtml(resolved?.data ?? null)) {
-      notFound();
-    }
+  if (!API_ORIGIN || !ORG) {
+    notFound();
   }
 
   return (

@@ -1,10 +1,8 @@
-import ArivuHelpAssets from './ArivuHelpAssets';
-import { SiteNav } from '@/components/site/nav';
-import { SiteNavSpacer } from '@/components/site/nav';
+import { API_ORIGIN } from '@/lib/arivu-help';
 import { Container } from '@/components/site/container';
 import { SiteFooter } from '@/components/site/footer';
-
-const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
+import { SiteNav, SiteNavSpacer } from '@/components/site/nav';
+import ArivuHelpAssets from './ArivuHelpAssets';
 
 export default function HelpLayout({ children }: { children: React.ReactNode }) {
   const stylesheetOrigin = API_ORIGIN.replace(/\/$/, '');
