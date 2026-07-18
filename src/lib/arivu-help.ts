@@ -1,6 +1,8 @@
-const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
-const ORG = process.env.ARIVU_ORG || '';
-const PATH_PREFIX = process.env.HELP_URL_PREFIX || '/help/';
+export const API_ORIGIN =
+  process.env.ARIVU_API_ORIGIN || 'https://app.arivusystems.com';
+export const ORG =
+  process.env.ARIVU_ORG || 'art_pub_ee6d481a167b1b88ffd36ce13ec9a842';
+export const PATH_PREFIX = process.env.HELP_URL_PREFIX || '/help/';
 
 export type ExportMeta = {
   title?: string;
@@ -61,9 +63,11 @@ export async function fetchCollectionExport(
   slug: string,
   parentSlug = '',
 ): Promise<ExportPayload | null> {
-  const query = parentSlug ? buildQuery({ parent: parentSlug }) : buildQuery();
+  const parent: Record<string, string> = parentSlug
+    ? { parent: parentSlug }
+    : {};
   return fetchExportJson(
-    `${contentBase()}/export/collections/${encodeURIComponent(slug)}${query}`,
+    `${contentBase()}/export/collections/${encodeURIComponent(slug)}${buildQuery(parent)}`,
   );
 }
 
