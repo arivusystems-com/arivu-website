@@ -61,9 +61,9 @@ export async function fetchCollectionExport(
   slug: string,
   parentSlug = '',
 ): Promise<ExportPayload | null> {
-  const query = parentSlug ? buildQuery({ parent: parentSlug }) : buildQuery();
+  const parent = parentSlug ? { parent: parentSlug } : {};
   return fetchExportJson(
-    `${contentBase()}/export/collections/${encodeURIComponent(slug)}${query}`,
+    `${contentBase()}/export/collections/${encodeURIComponent(slug)}${buildQuery(parent)}`,
   );
 }
 
