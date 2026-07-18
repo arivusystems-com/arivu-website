@@ -61,7 +61,9 @@ export async function fetchCollectionExport(
   slug: string,
   parentSlug = '',
 ): Promise<ExportPayload | null> {
-  const parent = parentSlug ? { parent: parentSlug } : {};
+  const parent: Record<string, string> = parentSlug
+    ? { parent: parentSlug }
+    : {};
   return fetchExportJson(
     `${contentBase()}/export/collections/${encodeURIComponent(slug)}${buildQuery(parent)}`,
   );
