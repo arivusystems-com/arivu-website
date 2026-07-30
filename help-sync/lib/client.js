@@ -1,5 +1,9 @@
 'use strict';
 
+const DEFAULT_MAX_RETRIES = 5;
+const DEFAULT_BASE_DELAY_MS = 1000;
+const DEFAULT_MAX_DELAY_MS = 30000;
+
 function buildContentBase(apiOrigin, org) {
   const origin = String(apiOrigin || '').replace(/\/$/, '');
   const orgKey = String(org || '').trim();
@@ -9,8 +13,58 @@ function buildContentBase(apiOrigin, org) {
   return `${origin}/api/public/v1/content/${encodeURIComponent(orgKey)}`;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+function parseRetryAfterMs(headerValue) {
+  if (!headerValue) return null;
+  const asSeconds = Number(headerValue);
+  if (Number.isFinite(asSeconds) && asSeconds >= 0) {
+    return Math.min(asSeconds * 1000, DEFAULT_MAX_DELAY_MS);
+  }
+  const asDate = Date.parse(headerValue);
+  if (!Number.isNaN(asDate)) {
+    return Math.min(Math.max(asDate - Date.now(), 0), DEFAULT_MAX_DELAY_MS);
+  }
+  return null;
+}
+
+function isRetryableStatus(status) {
+  return status === 429 || status === 502 || status === 503 || status === 504;
+}
+
+function backoffDelayMs(attempt, response) {
+  const retryAfter = parseRetryAfterMs(response?.headers?.get?.('retry-after'));
+  if (retryAfter != null) return retryAfter;
+  const exp = Math.min(DEFAULT_BASE_DELAY_MS * 2 ** attempt, DEFAULT_MAX_DELAY_MS);
+  const jitter = Math.floor(Math.random() * 250);
+  return exp + jitter;
+}
+
+async function fetchWithRetry(url, options = {}) {
+  const maxRetries = options.maxRetries ?? DEFAULT_MAX_RETRIES;
+  let lastError;
+
+  for (let attempt = 0; attempt <= maxRetries; attempt += 1) {
+    const response = await fetch(url, options.init);
+    if (!isRetryableStatus(response.status) || attempt === maxRetries) {
+      return response;
+    }
+
+    const delayMs = backoffDelayMs(attempt, response);
+    console.warn(
+      `[arivu-sync] ${response.status} from ${url} — retry ${attempt + 1}/${maxRetries} in ${delayMs}ms`,
+    );
+    await sleep(delayMs);
+    lastError = response;
+  }
+
+  return lastError;
+}
+
 async function fetchJson(url) {
-  const response = await fetch(url);
+  const response = await fetchWithRetry(url);
   const payload = await response.json().catch(() => ({}));
   if (!response.ok || !payload?.success) {
     const error = new Error(payload?.message || `Request failed (${response.status})`);
@@ -21,7 +75,7 @@ async function fetchJson(url) {
 }
 
 async function fetchBuffer(url) {
-  const response = await fetch(url);
+  const response = await fetchWithRetry(url);
   if (!response.ok) {
     const error = new Error(`Asset download failed (${response.status})`);
     error.status = response.status;
@@ -35,7 +89,7 @@ async function fetchBuffer(url) {
 }
 
 async function fetchText(url) {
-  const response = await fetch(url);
+  const response = await fetchWithRetry(url);
   if (!response.ok) {
     const error = new Error(`Request failed (${response.status})`);
     error.status = response.status;
@@ -122,4 +176,5 @@ module.exports = {
   fetchHomeExport,
   fetchCollectionExport,
   fetchStaticSitemap,
+  fetchWithRetry,
 };

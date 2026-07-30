@@ -61,7 +61,7 @@ export async function fetchCollectionExport(
   slug: string,
   parentSlug = '',
 ): Promise<ExportPayload | null> {
-  const parent = parentSlug ? { parent: parentSlug } : {};
+  const parent: Record<string, string> = parentSlug ? { parent: parentSlug } : {};
   return fetchExportJson(
     `${contentBase()}/export/collections/${encodeURIComponent(slug)}${buildQuery(parent)}`,
   );
@@ -136,9 +136,11 @@ export async function readSyncedPageHtml(pathname: string): Promise<string | nul
 
   const { promises: fs } = await import('node:fs');
   const path = await import('node:path');
+  // Scope under process.cwd() + fixed public folder so Turbopack does not NFT the whole repo.
+  const syncRoot = path.join(/*turbopackIgnore: true*/ process.cwd(), destRoot.replace(/^\.\//, ''));
   const candidates = [
-    path.join(process.cwd(), destRoot, relative, 'index.html'),
-    path.join(process.cwd(), destRoot, `${relative}.html`),
+    path.join(syncRoot, relative, 'index.html'),
+    path.join(syncRoot, `${relative}.html`),
   ];
 
   for (const filePath of candidates) {

@@ -34,13 +34,28 @@ if (syncMode === 'hybrid') {
   console.log('[arivu-sync] Hybrid mode — writing static HTML; App Router serves it when present, else live embed');
 }
 
-const result = await syncFull({
-  apiOrigin,
-  org,
-  dest,
-  pathPrefix,
-  siteOrigin,
-  mirrorAssets: process.env.ARIVU_MIRROR_ASSETS !== '0',
-});
+try {
+  const result = await syncFull({
+    apiOrigin,
+    org,
+    dest,
+    pathPrefix,
+    siteOrigin,
+    mirrorAssets: process.env.ARIVU_MIRROR_ASSETS !== '0',
+  });
 
-console.log(`[arivu-sync] Wrote ${result.count} pages to ${dest} (manifest ${result.version || 'unknown'})`);
+  console.log(`[arivu-sync] Wrote ${result.count} pages to ${dest} (manifest ${result.version || 'unknown'})`);
+} catch (error) {
+  const status = error?.status;
+  const message = error?.message || String(error);
+
+  // Hybrid can fall back to the live App Router embed if static HTML is missing.
+  if (syncMode === 'hybrid') {
+    console.warn(`[arivu-sync] Sync failed (${status || 'error'}): ${message}`);
+    console.warn('[arivu-sync] Continuing build — hybrid mode will serve live embeds for missing pages');
+    process.exit(0);
+  }
+
+  console.error(`[arivu-sync] Sync failed (${status || 'error'}): ${message}`);
+  process.exit(1);
+}

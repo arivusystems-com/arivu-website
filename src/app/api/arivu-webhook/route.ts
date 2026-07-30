@@ -1,6 +1,5 @@
 import { createRequire } from 'module';
 import crypto from 'crypto';
-import path from 'path';
 import { revalidatePath } from 'next/cache';
 import { NextResponse } from 'next/server';
 
@@ -13,7 +12,11 @@ const DEST = process.env.ARIVU_SYNC_DEST || './public';
 const PATH_PREFIX = process.env.HELP_URL_PREFIX || '/help/';
 const SITE_ORIGIN = process.env.SITE_ORIGIN || '';
 
+// Relative path so Turbopack can resolve the CJS help-sync module.
 const require = createRequire(import.meta.url);
+const helpSync = require('../../../../help-sync/lib/sync.js') as {
+  handleWebhookPayload: (options: Record<string, unknown>) => Promise<unknown>;
+};
 
 function verifyWebhookSignature(rawBody: string, secret: string, header: string | null): boolean {
   if (!secret) return true;
@@ -44,11 +47,7 @@ function shouldWriteStaticLocally(): boolean {
 async function writeStaticFromWebhook(payload: unknown): Promise<unknown | null> {
   if (!shouldWriteStaticLocally() || !API_ORIGIN || !ORG) return null;
   try {
-    const syncPath = path.join(process.cwd(), 'help-sync/lib/sync.js');
-    const { handleWebhookPayload } = require(syncPath) as {
-      handleWebhookPayload: (options: Record<string, unknown>) => Promise<unknown>;
-    };
-    return await handleWebhookPayload({
+    return await helpSync.handleWebhookPayload({
       apiOrigin: API_ORIGIN,
       org: ORG,
       dest: DEST,

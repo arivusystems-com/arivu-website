@@ -194,6 +194,16 @@ async function writeCustomerSitemap({
   return { destination, exportPath: `${normalizePathPrefix(pathPrefix)}sitemap.xml` };
 }
 
+function exportRequestGapMs() {
+  const raw = Number(process.env.ARIVU_SYNC_REQUEST_GAP_MS);
+  if (Number.isFinite(raw) && raw >= 0) return raw;
+  return 200;
+}
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function syncFull({
   apiOrigin,
   org,
@@ -207,9 +217,11 @@ async function syncFull({
   const client = createClient({ apiOrigin, org });
   const manifest = await client.fetchManifest(pathPrefix);
   const results = [];
+  const gapMs = exportRequestGapMs();
 
   for (const page of manifest.pages || []) {
     results.push(await syncPageExport({ client, dest, page, pathPrefix, siteOrigin }));
+    if (gapMs) await sleep(gapMs);
   }
 
   for (const article of manifest.articles || []) {
@@ -226,6 +238,7 @@ async function syncFull({
       client,
     });
     results.push(result);
+    if (gapMs) await sleep(gapMs);
   }
 
   const sitemap = await writeCustomerSitemap({ client, dest, pathPrefix, siteOrigin });
