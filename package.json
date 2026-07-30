@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "typegen": "sanity schema extract --path=src/sanity/extract.json && sanity typegen generate && rm ./src/sanity/extract.json"
+    "typegen": "sanity schema extract --path=src/sanity/extract.json && sanity typegen generate && rm ./src/sanity/extract.json",
+    "sync:help": "node scripts/sync-help-static.mjs",
+    "prebuild": "npm run sync:help"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.10",
