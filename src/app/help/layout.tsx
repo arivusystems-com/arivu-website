@@ -1,18 +1,10 @@
 import ArivuHelpAssets from './ArivuHelpAssets';
+import { API_ORIGIN } from '@/lib/arivu-help';
+import { SiteNav } from '@/components/site/nav';
+import { SiteNavSpacer } from '@/components/site/nav';
+import { Container } from '@/components/site/container';
+import { SiteFooter } from '@/components/site/footer';
 
-const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
-
-/**
- * Help layout for Arivu headless content.
- *
- * If your site nav/footer live in route layouts (e.g. app/blog/layout.tsx) instead of
- * app/layout.tsx, wrap {children} here with the same components — e.g. SiteNav,
- * SiteNavSpacer, Container, SiteFooter. The installer auto-patches this file when it
- * finds a reference layout during install.
- *
- * ARIVU_SYNC_MODE=layout does not render public/help/ static HTML; /help is served by
- * these Next.js routes and fetches content from the Arivu API at build/runtime.
- */
 export default function HelpLayout({ children }: { children: React.ReactNode }) {
   const stylesheetOrigin = API_ORIGIN.replace(/\/$/, '');
 
@@ -21,8 +13,21 @@ export default function HelpLayout({ children }: { children: React.ReactNode }) 
       {stylesheetOrigin ? (
         <link rel="stylesheet" href={`${stylesheetOrigin}/embed/headless-blocks.css`} />
       ) : null}
-      <div className="ld-help-root ld-help-embed">{children}</div>
+      <SiteNav />
+      <SiteNavSpacer />
+      <Container wide>
+        <div className="ld-help-root ld-help-embed arivu-help-chrome">{children}</div>
+      </Container>
+      <SiteFooter />
       <ArivuHelpAssets apiOrigin={API_ORIGIN} />
+      <style>{`
+        .arivu-help-chrome .ld-help-page,
+        .arivu-help-chrome .ld-help-home,
+        .arivu-help-chrome .ld-help-site {
+          max-width: none;
+          padding-inline: 0;
+        }
+      `}</style>
     </>
   );
 }
