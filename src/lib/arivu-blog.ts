@@ -1,5 +1,9 @@
-const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
-const ORG = process.env.ARIVU_BLOG_ORG || process.env.ARIVU_ORG || '';
+const API_ORIGIN =
+  process.env.ARIVU_API_ORIGIN || 'https://app.arivusystems.com';
+const ORG =
+  process.env.ARIVU_BLOG_ORG ||
+  process.env.ARIVU_ORG ||
+  'blog_pub_616d60dfaa9268090ceb2d922d003220';
 const PATH_PREFIX = process.env.BLOG_URL_PREFIX || '/blog/';
 
 export type ExportMeta = {

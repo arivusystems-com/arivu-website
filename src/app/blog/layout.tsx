@@ -1,9 +1,9 @@
 import ArivuBlogAssets from './ArivuBlogAssets';
 import { SiteFooter } from '@/components/site/footer';
-import { Container } from '@/components/site/container';
 import { SiteNav, SiteNavSpacer } from '@/components/site/nav';
 
-const API_ORIGIN = process.env.ARIVU_API_ORIGIN || '';
+const API_ORIGIN =
+  process.env.ARIVU_API_ORIGIN || 'https://app.arivusystems.com';
 
 /**
  * Blog layout for Arivu headless content.
@@ -21,9 +21,11 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
       ) : null}
       <SiteNav />
       <SiteNavSpacer />
-      <Container wide>
-        <div className="ld-blog-root ld-blog-embed arivu-blog-chrome">{children}</div>
-      </Container>
+      <main className="mx-auto w-full max-w-[1240px] min-h-dvh px-6 lg:px-10">
+        <div className="ld-blog-root ld-blog-embed arivu-blog-chrome min-h-dvh">
+          {children}
+        </div>
+      </main>
       <SiteFooter />
       <ArivuBlogAssets apiOrigin={API_ORIGIN} />
       <style>{`

@@ -14,7 +14,7 @@ const apiOrigin = process.env.ARIVU_API_ORIGIN || '';
 const dest = process.env.ARIVU_SYNC_DEST || './public';
 const pathPrefix = process.env.BLOG_URL_PREFIX || '/blog/';
 const siteOrigin = process.env.SITE_ORIGIN || '';
-const syncMode = process.env.ARIVU_SYNC_MODE || 'hybrid';
+const syncMode = process.env.ARIVU_SYNC_MODE || 'layout';
 
 if (syncMode === 'layout') {
   console.log('[arivu-blog-sync] Layout mode — pages built via Next.js using your site layout (no static HTML write)');
@@ -22,11 +22,11 @@ if (syncMode === 'layout') {
 }
 
 if (!org || !apiOrigin) {
-  if (syncMode === 'static' || syncMode === 'hybrid') {
-    console.error('[arivu-blog-sync] ARIVU_BLOG_ORG (or ARIVU_ORG) and ARIVU_API_ORIGIN are required for static/hybrid sync');
-    process.exit(1);
-  }
-  console.warn('[arivu-blog-sync] Skipping blog static sync: set ARIVU_BLOG_ORG (or ARIVU_ORG) and ARIVU_API_ORIGIN');
+  // Never fail the build: on Vercel, layout mode / live fetch only need
+  // env at runtime. Missing vars here just means skip static writes.
+  console.warn(
+    '[arivu-blog-sync] Skipping blog static sync: set ARIVU_BLOG_ORG (or ARIVU_ORG) and ARIVU_API_ORIGIN',
+  );
   process.exit(0);
 }
 

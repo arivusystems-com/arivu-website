@@ -2,7 +2,6 @@ import ArivuHelpAssets from './ArivuHelpAssets';
 import { API_ORIGIN } from '@/lib/arivu-help';
 import { SiteNav } from '@/components/site/nav';
 import { SiteNavSpacer } from '@/components/site/nav';
-import { Container } from '@/components/site/container';
 import { SiteFooter } from '@/components/site/footer';
 
 export default function HelpLayout({ children }: { children: React.ReactNode }) {
@@ -15,9 +14,11 @@ export default function HelpLayout({ children }: { children: React.ReactNode }) 
       ) : null}
       <SiteNav />
       <SiteNavSpacer />
-      <Container wide>
-        <div className="ld-help-root ld-help-embed arivu-help-chrome">{children}</div>
-      </Container>
+      <main className="mx-auto w-full max-w-[1240px] min-h-dvh px-6 lg:px-10">
+        <div className="ld-help-root ld-help-embed arivu-help-chrome min-h-dvh">
+          {children}
+        </div>
+      </main>
       <SiteFooter />
       <ArivuHelpAssets apiOrigin={API_ORIGIN} />
       <style>{`
