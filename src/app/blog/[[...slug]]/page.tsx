@@ -24,7 +24,8 @@ export async function generateStaticParams() {
 }
 
 export const dynamicParams = true;
-export const revalidate = 3600;
+// Short revalidate so a bad export response doesn't pin a 404 for hours
+export const revalidate = 60;
 
 export async function generateMetadata({
   params,
@@ -36,7 +37,12 @@ export async function generateMetadata({
   if (slug.length === 0) {
     const home = await fetchHomeExport();
     const meta = home?.meta;
-    if (!meta) return {};
+    if (!meta) {
+      return {
+        title: 'Blog',
+        description: 'Latest posts from Arivu.',
+      };
+    }
     return {
       title: meta.title,
       description: meta.description,
@@ -69,16 +75,22 @@ export default async function BlogPage({
     return <ArivuBlogContent html={syncedHtml} />;
   }
 
+  // Blog index: never call notFound() — a rate-limited/failed export would
+  // otherwise bake a static 404 for /blog. Always mount the embed shell.
   if (slug.length === 0) {
-    const home = await fetchHomeExport();
-    if (!home) {
-      notFound();
-    }
-  } else {
-    const resolved = await resolveBlogPage(slug);
-    if (!pickPageHtml(resolved?.data ?? null)) {
-      notFound();
-    }
+    return (
+      <ArivuBlogEmbed
+        apiOrigin={API_ORIGIN}
+        org={ORG}
+        pathPrefix={PATH_PREFIX}
+        pathname={pathname}
+      />
+    );
+  }
+
+  const resolved = await resolveBlogPage(slug);
+  if (!pickPageHtml(resolved?.data ?? null)) {
+    notFound();
   }
 
   return (
