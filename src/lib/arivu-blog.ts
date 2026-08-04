@@ -126,8 +126,8 @@ export async function readSyncedPageHtml(pathname: string): Promise<string | nul
   const { promises: fs } = await import('node:fs');
   const path = await import('node:path');
   const candidates = [
-    path.join(process.cwd(), destRoot, relative, 'index.html'),
-    path.join(process.cwd(), destRoot, `${relative}.html`),
+    path.join(/* turbopackIgnore: true */ process.cwd(), destRoot, relative, 'index.html'),
+    path.join(/* turbopackIgnore: true */ process.cwd(), destRoot, `${relative}.html`),
   ];
 
   for (const filePath of candidates) {
