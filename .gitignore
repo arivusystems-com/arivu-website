@@ -42,12 +42,6 @@ yarn-error.log*
 # turbo
 .turbo
 
-# sanity
-.sanity
-
-# local seed archives
-seed.tar.gz
-
 # editor directories
 .idea
 .vscode/*
