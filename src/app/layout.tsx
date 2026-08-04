@@ -1,5 +1,3 @@
-import { SanityLive } from '@/sanity/live'
-import { revalidateSyncTags } from '@/sanity/revalidateSyncTags'
 import '@/styles/tailwind.css'
 import { GeistSans } from 'geist/font/sans'
 import type { Metadata } from 'next'
@@ -25,14 +23,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={GeistSans.variable}>
-      <head>
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="The Arivu Blog"
-          href="/blog/feed.xml"
-        />
-      </head>
       <body className="bg-page font-sans text-ink antialiased">
         {children}
         {process.env.NEXT_PUBLIC_ARIVU_CHAT_INSTANCE_KEY ? (
@@ -48,7 +38,6 @@ export default function RootLayout({
             strategy="afterInteractive"
           />
         ) : null}
-        <SanityLive revalidateSyncTags={revalidateSyncTags} />
       </body>
     </html>
   )
